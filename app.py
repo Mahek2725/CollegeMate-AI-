@@ -142,7 +142,7 @@ or
 NO
 """
 
-       decision = ask_gemini(decision_prompt)
+         decision = ask_gemini(decision_prompt)
 
 
     # ---------------- AGENT DECISION ----------------
@@ -179,7 +179,7 @@ Answer:
             st.success("✅ Answer")
             st.write(answer)
         else:
-            st.error("Could not get a response from Ollama.")
+            st.error("Could not get a response from Gemini.")
 
     else:
 
@@ -193,7 +193,7 @@ Answer:
 
 # ---------------- FOOTER ----------------
 st.markdown(
-    '<div class="footer">Built with ❤️ using Streamlit + Gemini</div>',,
+    '<div class="footer">Built with ❤️ using Streamlit + Gemini</div>',
     unsafe_allow_html=True
 )
 
