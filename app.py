@@ -1,5 +1,7 @@
 import streamlit as st
-import requests
+from google import genai
+
+client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(
