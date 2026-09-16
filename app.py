@@ -93,21 +93,19 @@ with st.expander("💡 What can I ask?"):
     """)
 
 
-# ---------------- OLLAMA FUNCTION ----------------
-def ask_ollama(prompt):
+# ---------------- GEMINI FUNCTION ----------------
+def ask_gemini(prompt):
 
-    response = requests.post(
-        "http://localhost:11434/api/generate",
-        json={
-            "model": "llama3.2:latest",
-            "prompt": prompt,
-            "stream": False
-        }
-    )
+    try:
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt
+        )
 
-    if response.status_code == 200:
-        return response.json()["response"].strip()
-    else:
+        return response.text.strip()
+
+    except Exception as e:
+        st.error(f"Gemini Error: {e}")
         return None
 
 
@@ -144,7 +142,7 @@ or
 NO
 """
 
-        decision = ask_ollama(decision_prompt)
+       decision = ask_gemini(decision_prompt)
 
 
     # ---------------- AGENT DECISION ----------------
@@ -175,7 +173,7 @@ Answer:
 """
 
         with st.spinner("📚 Finding the answer..."):
-            answer = ask_ollama(answer_prompt)
+           answer = ask_gemini(answer_prompt)
 
         if answer:
             st.success("✅ Answer")
@@ -195,7 +193,7 @@ Answer:
 
 # ---------------- FOOTER ----------------
 st.markdown(
-    '<div class="footer">Built with ❤️ using Streamlit + Ollama + Llama 3.2</div>',
+    '<div class="footer">Built with ❤️ using Streamlit + Gemini</div>',,
     unsafe_allow_html=True
 )
 
